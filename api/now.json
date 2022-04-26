@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "api-petgram-server",
+  "name": "petgram-api-server-ivis",
   "alias": ["petgram-api-server-ivis"],
   "builds": [{ "src": "index.js", "use": "@now/node" }],
   "routes": [{
