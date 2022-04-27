@@ -29,5 +29,6 @@ export const Button = styled.button`
     padding-top:  8px;
     & svg {
         margin-right: 4px;
+        color: red;
     }
 `

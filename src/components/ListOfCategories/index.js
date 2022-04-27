@@ -3,15 +3,22 @@ import { Category } from '../Category'
 
 import { ListItem, UnOrderedList } from './styles'
 
-export const ListOfCategories = () => {
+function useFetchCategories () {
   const [categories, setCategories] = useState([])
-  const [showFixed, setShowFixed] = useState(false)
-
+  const [loading, setLoading] = useState(false)
   useEffect(() => {
+    setLoading(true)
     window.fetch('https://curso-platzi-react-avanzado-qzmfht695-ivisorea.vercel.app/categories')
       .then(res => res.json())
       .then(data => setCategories(data))
+      .finally(() => setLoading(false))
   }, [])
+  return { categories, loading }
+}
+
+export const ListOfCategories = () => {
+  const { categories, loading } = useFetchCategories()
+  const [showFixed, setShowFixed] = useState(false)
 
   useEffect(() => {
     const onScroll = e => {
@@ -24,13 +31,19 @@ export const ListOfCategories = () => {
 
   const renderList = (fixed) => {
     return (
-      <UnOrderedList className={fixed ? 'fixed' : ''}>
+      <UnOrderedList fixed={fixed}>
         {
-            categories.map(category => (
-              <ListItem key={category.id}>
-                <Category {...category} />
-              </ListItem>
-            ))
+            loading
+              ? [1, 2, 3, 4, 5].map((item, index) => (
+                <ListItem key={index}>
+                  <Category item={item} />
+                </ListItem>
+                ))
+              : categories.map(category => (
+                <ListItem key={category.id}>
+                  <Category {...category} />
+                </ListItem>
+              ))
         }
       </UnOrderedList>
     )
