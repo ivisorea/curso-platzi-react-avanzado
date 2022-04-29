@@ -5,6 +5,7 @@ import { useLocalStorage } from '../../hooks/useLocalStorage'
 import { FavButton } from '../FavButton'
 import { gql, useMutation } from '@apollo/client'
 import { Loader } from '../Loader'
+import { Link } from 'react-router-dom'
 
 const LIKE_ANONYMOUS_PHOTOS = gql`
 mutation likeAnonymousPhoto($input: LikePhoto!){
@@ -33,11 +34,11 @@ export const PhotoCard = ({ id, likes = 0, src }) => {
       {
         show && (
           <>
-            <a href={`/?detail=${id}`}>
+            <Link to={`/detail/${id}`}>
               <ImgWrapper>
                 <Img src={src} />
               </ImgWrapper>
-            </a>
+            </Link>
             <FavButton likes={likes} liked={liked} onClick={handleFavClick} />
           </>
         )
