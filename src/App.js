@@ -16,6 +16,8 @@ export const App = () => {
           <Route path='/' element={<Home />} />
           <Route path='/detail/:id' element={<PhotoCardWithQuery />} />
           <Route path='/pet/:categoryId' element={<ListOfPhotoCard />} />
+          <Route path='/fav' />
+          <Route path='/user' />
         </Route>
         <Route path='*' element={<NotFound />} />
       </Routes>
